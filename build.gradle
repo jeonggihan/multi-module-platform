@@ -1,0 +1,45 @@
+buildscript {
+    ext {
+        springBootVersion = '3.2.12'
+        lombokVersion = '1.18.30' // 최신 버전 확인 필요
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+    }
+}
+
+allprojects {
+    group = 'com.adnetwork'
+    version = '0.0.1-SNAPSHOT'
+
+    repositories {
+        mavenCentral()
+    }
+}
+
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'io.spring.dependency-management'
+
+    sourceCompatibility = '21'
+    targetCompatibility = '21'
+
+    dependencies {
+
+        compileOnly "org.projectlombok:lombok:${lombokVersion}"
+        annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+        testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
+        testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+        testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+}
+

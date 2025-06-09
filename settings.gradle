@@ -1,0 +1,6 @@
+rootProject.name = 'ad-platform'
+
+include 'core'
+include 'api'
+include 'engine'
+include 'common'

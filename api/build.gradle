@@ -1,0 +1,32 @@
+plugins {
+    id 'org.springframework.boot'
+}
+
+version = '0.0.1-SNAPSHOT'
+
+dependencies {
+    implementation project(':core')
+    implementation project(':common')
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
+
+    implementation 'com.querydsl:querydsl-jpa:5.1.0:jakarta'
+    annotationProcessor 'com.querydsl:querydsl-apt:5.1.0:jakarta'
+    annotationProcessor 'jakarta.persistence:jakarta.persistence-api'
+    annotationProcessor 'jakarta.annotation:jakarta.annotation-api'
+
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+    implementation 'com.h2database:h2' //TODO: test implementation으로 전환
+    implementation 'it.ozimov:embedded-redis:0.7.2' //TODO: test implementation으로 전환
+    runtimeOnly 'it.ozimov:embedded-redis' //TODO: test implementation으로 전환
+    runtimeOnly 'com.h2database:h2'
+
+}
