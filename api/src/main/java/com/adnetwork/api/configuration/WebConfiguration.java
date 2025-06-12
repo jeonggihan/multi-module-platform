@@ -9,12 +9,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfiguration implements WebMvcConfigurer {
 
-    @Bean
-    public FilterRegistrationBean<TraceIdFilter> traceIdFilter() {
-        FilterRegistrationBean<TraceIdFilter> registrationBean = new FilterRegistrationBean<>();
-        registrationBean.setFilter(new TraceIdFilter());
-        registrationBean.setOrder(1);
-        registrationBean.addUrlPatterns("/*");
-        return registrationBean;
-    }
+  @Bean
+  public FilterRegistrationBean<TraceIdFilter> traceIdFilter() {
+    FilterRegistrationBean<TraceIdFilter> registrationBean = new FilterRegistrationBean<>();
+    registrationBean.setFilter(new TraceIdFilter());
+    registrationBean.setOrder(1);
+    registrationBean.addUrlPatterns("/*");
+    return registrationBean;
+  }
 }

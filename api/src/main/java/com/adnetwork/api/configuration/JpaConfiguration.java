@@ -8,4 +8,5 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @EntityScan(basePackages = "com.adnetwork.common")
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
 public class JpaConfiguration {
+
 }

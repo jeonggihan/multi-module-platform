@@ -7,13 +7,13 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class CommonResponse<T> {
 
-    private final T data;
+  private final T data;
 
-    public static <T> CommonResponse<T> success() {
-        return success(null);
-    }
+  public static <T> CommonResponse<T> success() {
+    return success(null);
+  }
 
-    public static <T> CommonResponse<T> success(T data) {
-        return CommonResponse.<T>builder().data(data).build();
-    }
+  public static <T> CommonResponse<T> success(T data) {
+    return CommonResponse.<T>builder().data(data).build();
+  }
 }
