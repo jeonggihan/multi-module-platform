@@ -12,11 +12,17 @@ import redis.embedded.RedisServer;
 @Configuration
 public class EmbeddedRedisConfig {
 
+  private static final String OS = System.getProperty("os.name").toLowerCase();
+
   private final RedisServer redisServer;
   private static final int DEFAULT_PORT = 6379;
 
   public EmbeddedRedisConfig() {
-    redisServer = new RedisServer(Objects.requireNonNull(getRedisServerExecutable()), DEFAULT_PORT);
+    if (isWindow()) {
+      redisServer = new RedisServer(DEFAULT_PORT);
+    } else {
+      redisServer = new RedisServer(Objects.requireNonNull(getRedisServerExecutable()), DEFAULT_PORT);
+    }
     redisServer.start();
   }
 
@@ -32,4 +38,9 @@ public class EmbeddedRedisConfig {
       throw new IllegalCallerException("redis server executable not found");
     }
   }
+
+  private static boolean isWindow() {
+    return OS.contains("win");
+  }
+
 }
