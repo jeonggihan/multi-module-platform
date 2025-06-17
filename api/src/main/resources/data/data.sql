@@ -35,3 +35,27 @@ INSERT INTO screen_permission (role_id, screen_id, can_read, can_write, created_
 VALUES (2, 2, 'USED', 'NOT_USED', 'system'), -- 대시보드: 읽기만
        (2, 3, 'USED', 'NOT_USED', 'system'); -- 리포트: 읽기만
 
+-- USD 기준
+INSERT INTO exchange_rate (base_currency, target_currency, exchange_rate, exchange_date, used, created_by)
+VALUES
+    ('USD', 'KRW', 1378.25, '2025-06-17', 'USED', 'system'),
+    ('USD', 'JPY', 154.90, '2025-06-17', 'USED', 'system'),
+    ('USD', 'EUR', 0.9312, '2025-06-17', 'USED', 'system'),
+    ('USD', 'GBP', 0.7895, '2025-06-17', 'USED', 'system'),
+    ('USD', 'CNY', 7.2301, '2025-06-17', 'USED', 'system'),
+    ('USD', 'AUD', 1.4998, '2025-06-17', 'USED', 'system'),
+    ('USD', 'CAD', 1.3625, '2025-06-17', 'USED', 'system'),
+    ('USD', 'SGD', 1.3432, '2025-06-17', 'USED', 'system');
+
+-- KRW 기준 (역산 환율)
+INSERT INTO exchange_rate (base_currency, target_currency, exchange_rate, exchange_date, used, created_by)
+VALUES
+    ('KRW', 'USD', 0.0007254, '2025-06-17', 'USED', 'system'),
+    ('KRW', 'JPY', 0.1124, '2025-06-17', 'USED', 'system'),
+    ('KRW', 'EUR', 0.0006755, '2025-06-17', 'USED', 'system'),
+    ('KRW', 'GBP', 0.0005727, '2025-06-17', 'USED', 'system'),
+    ('KRW', 'CNY', 0.00525, '2025-06-17', 'USED', 'system'),
+    ('KRW', 'AUD', 0.0007269, '2025-06-17', 'USED', 'system'),
+    ('KRW', 'CAD', 0.0007281, '2025-06-17', 'USED', 'system'),
+    ('KRW', 'SGD', 0.0007276, '2025-06-17', 'USED', 'system');
+

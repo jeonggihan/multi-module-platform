@@ -12,7 +12,7 @@ CREATE TABLE member
     created_at   DATETIME    DEFAULT CURRENT_TIMESTAMP COMMENT '등록일시',
     updated_by   VARCHAR(100) COMMENT '수정자 (시스템 또는 사용자)',
     updated_at   DATETIME    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '수정일시'
-) COMMENT='회원 마스터 테이블';
+) COMMENT ='회원 마스터 테이블';
 
 -- 역할 테이블
 CREATE TABLE role
@@ -25,7 +25,7 @@ CREATE TABLE role
     created_at DATETIME    DEFAULT CURRENT_TIMESTAMP,
     updated_by VARCHAR(100),
     updated_at DATETIME    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) COMMENT='권한 역할 테이블';
+) COMMENT ='권한 역할 테이블';
 
 -- 회원 <> 역할 매핑 테이블
 CREATE TABLE member_role
@@ -36,7 +36,7 @@ CREATE TABLE member_role
 
     FOREIGN KEY (member_id) REFERENCES member (id),
     FOREIGN KEY (role_id) REFERENCES role (id)
-) COMMENT='회원-역할 매핑 테이블';
+) COMMENT ='회원-역할 매핑 테이블';
 
 -- 화면 테이블
 CREATE TABLE screen
@@ -50,7 +50,7 @@ CREATE TABLE screen
     created_at DATETIME    DEFAULT CURRENT_TIMESTAMP,
     updated_by VARCHAR(100),
     updated_at DATETIME    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) COMMENT='관리 화면 정의 테이블';
+) COMMENT ='관리 화면 정의 테이블';
 
 -- 역할 <> 화면 <> 권한 설정 테이블
 CREATE TABLE screen_permission
@@ -69,4 +69,20 @@ CREATE TABLE screen_permission
     UNIQUE (role_id, screen_id),
     FOREIGN KEY (role_id) REFERENCES role (id),
     FOREIGN KEY (screen_id) REFERENCES screen (id)
-) COMMENT='역할별 화면 접근 권한 테이블';
+) COMMENT ='역할별 화면 접근 권한 테이블';
+
+CREATE TABLE exchange_rate
+(
+    id              BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '환율 고유 ID',
+    base_currency   VARCHAR(3)     NOT NULL COMMENT '기준 통화 코드 (예: USD)',
+    target_currency VARCHAR(3)     NOT NULL COMMENT '대상 통화 코드 (예: KRW)',
+    exchange_rate   DECIMAL(18, 8) NOT NULL COMMENT '기준 통화 대비 대상 통화의 환율',
+    exchange_date   DATE           NOT NULL COMMENT '환율 기준 일자',
+    used            VARCHAR(10)    NOT NULL DEFAULT 'USED' COMMENT '사용 여부 (USED, NOT_USED)',
+    created_by      VARCHAR(100)   NOT NULL COMMENT '등록자',
+    updated_by      VARCHAR(100)            DEFAULT NULL COMMENT '수정자',
+    created_at      DATETIME       NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '등록일',
+    updated_at      DATETIME                DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '수정일',
+
+    UNIQUE KEY uq_exchange_rate_date (base_currency, target_currency, exchange_date)
+) COMMENT '통화 환율 테이블';
