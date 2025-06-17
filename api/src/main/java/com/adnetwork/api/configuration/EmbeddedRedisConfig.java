@@ -18,11 +18,7 @@ public class EmbeddedRedisConfig {
   private static final int DEFAULT_PORT = 6379;
 
   public EmbeddedRedisConfig() {
-    if (isWindow()) {
-      redisServer = new RedisServer(DEFAULT_PORT);
-    } else {
-      redisServer = new RedisServer(Objects.requireNonNull(getRedisServerExecutable()), DEFAULT_PORT);
-    }
+    redisServer = new RedisServer(Objects.requireNonNull(getRedisServerExecutable()), DEFAULT_PORT);
     redisServer.start();
   }
 
@@ -33,7 +29,11 @@ public class EmbeddedRedisConfig {
 
   private File getRedisServerExecutable() {
     try {
-      return new ClassPathResource("redis/redis-server-6.0.10").getFile();
+      if (isWindow()) {
+        return new ClassPathResource("redis/redis-server.exe").getFile();
+      } else {
+        return new ClassPathResource("redis/redis-server-6.0.10").getFile();
+      }
     } catch (Exception e) {
       throw new IllegalCallerException("redis server executable not found");
     }
