@@ -1,6 +1,7 @@
-package com.adnetwork.common.member;
+package com.adnetwork.common.exchange;
 
 import com.adnetwork.common.base.BaseAuditableEntity;
+import com.adnetwork.core.variable.CurrencyCode;
 import com.adnetwork.core.variable.StatusCode;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -26,10 +27,12 @@ public class ExchangeRate extends BaseAuditableEntity {
     private Long id;
 
     @Column(length = 3, nullable = false)
-    private String baseCurrency;
+    @Enumerated(EnumType.STRING)
+    private CurrencyCode baseCurrency;
 
     @Column(length = 3, nullable = false)
-    private String targetCurrency;
+    @Enumerated(EnumType.STRING)
+    private CurrencyCode targetCurrency;
 
     @Column(precision = 18, scale = 8, nullable = false)
     private BigDecimal exchangeRate;
