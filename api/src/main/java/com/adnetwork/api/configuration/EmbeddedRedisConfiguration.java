@@ -5,10 +5,12 @@ import java.io.File;
 import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.ClassPathResource;
 import redis.embedded.RedisServer;
 
 @Slf4j
+@Profile({"local", "development"})
 @Configuration
 public class EmbeddedRedisConfiguration {
 
