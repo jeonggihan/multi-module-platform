@@ -10,14 +10,14 @@ import redis.embedded.RedisServer;
 
 @Slf4j
 @Configuration
-public class EmbeddedRedisConfig {
+public class EmbeddedRedisConfiguration {
 
   private static final String OS = System.getProperty("os.name").toLowerCase();
 
   private final RedisServer redisServer;
   private static final int DEFAULT_PORT = 6379;
 
-  public EmbeddedRedisConfig() {
+  public EmbeddedRedisConfiguration() {
     redisServer = new RedisServer(Objects.requireNonNull(getRedisServerExecutable()), DEFAULT_PORT);
     redisServer.start();
   }
